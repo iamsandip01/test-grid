@@ -1,0 +1,402 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold?styles=20876,20878,20879,20880');
+
+/* From Uiverse.io by alexmaracinaru */
+.cta {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.cta span {
+    padding-bottom: 7px;
+    letter-spacing: 4px;
+    font-size: 14px;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+
+.cta svg {
+    transform: translateX(-8px);
+    transition: all 0.3s ease;
+}
+
+.cta:hover svg {
+    transform: translateX(0);
+}
+
+.cta:active svg {
+    transform: scale(0.9);
+}
+
+.hover-underline-animation {
+    position: relative;
+    color: black;
+    padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #000000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.hero {
+    font-family: 'Gilroy-Light', sans-serif;
+    width: 100%;
+    padding: 10rem 4% 4rem 4%;
+    background-color: #fff;
+}
+
+.hero h1 {
+    font-size: 3.875rem;
+    font-family: 'Gilroy-Medium', sans-serif;
+    line-height: 99px;
+    margin-bottom: 0.5rem;
+    color: #000000;
+    letter-spacing: 1px;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+.hero p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 25.6px;
+    font-weight: 100;
+    max-width: 59.7vw;
+}
+
+.quote-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    font-family: 'Gilroy-Medium', sans-serif;
+    font-weight: 200;
+    font-size: 16px;
+    letter-spacing: 1.6px;
+    color: black;
+    position: relative;
+    transition: font-size 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.quote-link::after {
+    content: "";
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    bottom: -2px;
+    height: 2px;
+    background-color: black;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.quote-link:hover {
+    font-size: 18px;
+}
+
+/* PROJECTS Body start */
+.parent {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: hidden;
+    padding: 0 50px;
+}
+
+.group {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 8px;
+}
+
+.grid-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-item img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    height: auto;
+    width: 100%;
+    transition: opacity 0.5s ease, transform 1.5s ease;
+}
+
+.grid-item img.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.overlay .text-line1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.overlay .text-line2 {
+    font-size: 1em;
+    color: #222;
+}
+
+.grid-item:hover .overlay {
+    opacity: 1;
+}
+
+.group>.grid-item {
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 1.5s ease-out;
+}
+
+.group>.grid-item.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.grid-item {
+    position: relative;
+    overflow: hidden; /* Ensures the image does not overflow */
+}
+
+.grid-item img {
+    transition: transform 0.5s ease, filter 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image stays within bounds */
+}
+
+.grid-item:hover img {
+    filter: blur(2px);
+    transform: scale(1.01);
+}
+
+.grid-item:hover .overlay {
+    opacity: 1;
+}
+
+/* SEE MORE STYLING IN PROJECTS */
+.more-projects {
+    align-items: center;
+    background-color: transparent;
+    margin-left: 2%;
+    color: #000000;
+    cursor: pointer;
+    display: flex;
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 200;
+    line-height: 1.5;
+    text-decoration: none;
+    text-transform: uppercase;
+    outline: 0;
+    border: 0;
+    padding: 1rem;
+}
+
+.more-projects:before {
+    background-color: #000000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    margin-right: 10px;
+    transition: all 0.42s cubic-bezier(0.25, 0.8, 0.25, 1);
+    width: 0;
+}
+
+.more-projects:hover:before {
+    background-color: #030303;
+    width: 3rem;
+}
+
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+
+/* Small screens (phones, less than 600px) */
+@media (max-width: 600px) {
+    .hero {
+        padding-top: 6rem;
+        padding-bottom: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        line-height: 3rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        font-size: 0.9rem;
+        line-height: 1.4rem;
+        max-width: 90%;
+    }
+
+    .quote-link {
+        font-size: 14px;
+    }
+
+    .quote-link:hover {
+        font-size: 15px;
+    }
+
+    .parent {
+        padding: 0 20px;
+        gap: 10px;
+    }
+
+    .group {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .overlay {
+        font-size: 12px;
+    }
+
+    .overlay .text-line1 {
+        font-size: 1.1em;
+        margin-bottom: 3px;
+    }
+
+    .more-projects {
+        font-size: 0.9rem;
+        padding: 0.8rem;
+        margin-left: 5%;
+    }
+
+    .more-projects:before {
+        margin-right: 5px;
+    }
+
+    .more-projects:hover:before {
+        width: 2rem;
+    }
+}
+
+/* Medium screens (tablets, 601px to 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+    .hero {
+        padding-top: 8rem;
+        padding-bottom: 3rem;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        line-height: 3.5rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        max-width: 80%;
+    }
+
+    .group {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .parent {
+        padding: 0 30px;
+        gap: 15px;
+    }
+
+    .overlay {
+        font-size: 13px;
+    }
+
+    .more-projects {
+        margin-left: 3%;
+        font-size: 0.95rem;
+        padding: 0.9rem;
+    }
+
+    .more-projects:before {
+        margin-right: 8px;
+        width: 0;
+    }
+
+    .more-projects:hover:before {
+        width: 2.5rem;
+    }
+}
+
+/* Large screens (desktops, more than 900px) - Base styles apply */
+@media (min-width: 901px) {
+    .hero {
+        padding-top: 10rem;
+        padding-bottom: 4rem;
+    }
+
+    .hero h1 {
+        font-size: 3.875rem;
+        line-height: 99px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+        max-width: 59.7vw;
+    }
+
+    .parent {
+        padding: 0 50px;
+        gap: 20px;
+    }
+
+    .group {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+
+    .overlay {
+        font-size: 14px;
+    }
+
+    .more-projects {
+        margin-left: 2%;
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
+    .more-projects:before {
+        width: 0;
+        margin-right: 10px;
+    }
+
+    .more-projects:hover:before {
+        width: 3rem;
+    }
+}

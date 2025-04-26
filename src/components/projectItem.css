@@ -1,0 +1,58 @@
+.grid-item {
+    position: relative;
+    overflow: hidden;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 1.5s ease-out;
+  }
+  
+  .grid-item.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  
+  .grid-item img {
+    transition: transform 0.5s ease, filter 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .grid-item:hover img {
+    filter: blur(2px);
+    transform: scale(1.01);
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  
+  .overlay .text-line1 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .overlay .text-line2 {
+    font-size: 1em;
+    color: #222;
+  }
+  
+  .grid-item:hover .overlay {
+    opacity: 1;
+  }

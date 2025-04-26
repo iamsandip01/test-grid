@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.footer {
+  background-color: black;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1.5rem 2.5rem 1rem 2.5rem;
+}
+
+.footer-heading {
+  font-size: 18px;
+  letter-spacing: 3px;
+  font-weight: 500;
+  padding: 1.75rem 0;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Quick link styles */
+.footer-quick-link {
+  cursor: pointer;
+}
+
+.footer-quick-link:hover {
+  text-decoration: underline;
+}
+.footer-quick-links-container {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-quick-links-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 10px;
+}
+
+
+/* Brand icon styles */
+.footer-brand-icon {
+  cursor: pointer;
+  transition-duration: 0.25s;
+}
+
+.footer-brand-icon:hover {
+  color: #ccc;
+  scale: 1.1;
+}
+
+/* Input field styles */
+.footer-input {
+  width: 100%;
+  padding: 6px 8px;
+  outline: none;
+  background-color: #1a1a1a;
+  border: 0;
+  color: white;
+}
+
+/* Button styles */
+.footer-button {
+  background-color: white;
+  padding: 14px 56px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  transition-duration: 0.5s;
+  border: 1px solid white;
+}
+
+.footer-button:hover {
+  background-color: #1a1a1a;
+  color: white;
+}/* Other existing styles remain unchanged */
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr; /* Stack columns in smaller screens */
+    display: block; /* Remove flex display in responsive layout */
+  }
+
+  .footer-button {
+    width: 100%; /* Ensure button fills the width in small screens */
+    padding: 10px;
+  }
+
+  .footer-heading {
+    font-size: 16px; /* Adjust heading size for smaller screens */
+  }
+  .footer-quick-links-container {
+    display: block; /* Remove flex display and use block layout for responsiveness */
+  }
+  .footer-quick-link {
+    padding-left: 0; /* Remove left padding for Quick Links */
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 1rem; /* Adjust overall padding for mobile devices */
+  }
+
+  .footer-heading {
+    font-size: 14px;
+  }
+
+  .footer-button {
+    font-size: 10px;
+    padding: 8px 32px;
+  }
+
+  .footer-content {
+    display: block; /* Ensure content displays in block layout for smaller screens */
+  }
+  .footer-quick-links-container {
+    display: block; /* Remove flex display and use block layout for responsiveness */
+  }
+  .footer-quick-link {
+    padding-left: 0;
+  }
+}
