@@ -9,7 +9,7 @@ import { CustomEase } from 'gsap/CustomEase';
 
 const slidesData = [
   {
-    img: "assets/slider1.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider1.jpg",
     alt: "Slide 1",
     text: "WE CREATE SPACE FOR MANUFACTURING",
     projectNumber: "PROJECT 1",
@@ -17,7 +17,7 @@ const slidesData = [
     link: "project1.html"
   },
   {
-    img: "assets/slider2.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
     alt: "Slide 2",
     text: "INNOVATION MEETS DESIGN",
     projectNumber: "PROJECT 2",
@@ -25,7 +25,7 @@ const slidesData = [
     link: "project2.html"
   },
   {
-    img: "assets/slider3.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider3.jpg",
     alt: "Slide 3",
     text: "BUILDING THE FUTURE",
     projectNumber: "PROJECT 3",
@@ -33,7 +33,7 @@ const slidesData = [
     link: "project3.html"
   },
   {
-    img: "assets/slider4.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider4.jpg",
     alt: "Slide 4",
     text: "ARCHITECTURE REDEFINED",
     projectNumber: "PROJECT 4",
@@ -41,7 +41,7 @@ const slidesData = [
     link: "project4.html"
   },
   {
-    img: "assets/slider5.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider5.jpg",
     alt: "Slide 5",
     text: "EXPERIENCE EXCELLENCE",
     projectNumber: "PROJECT 5",
@@ -49,7 +49,7 @@ const slidesData = [
     link: "project5.html"
   },
   {
-    img: "assets/slider2.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
     alt: "Slide 6",
     text: "INNOVATION MEETS DESIGN",
     projectNumber: "PROJECT 6",
@@ -57,7 +57,7 @@ const slidesData = [
     link: "project2.html"
   },
   {
-    img: "assets/slider2.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
     alt: "Slide 7",
     text: "INNOVATION MEETS DESIGN",
     projectNumber: "PROJECT 7",
@@ -65,7 +65,7 @@ const slidesData = [
     link: "project2.html"
   },
   {
-    img: "assets/slider2.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
     alt: "Slide 8",
     text: "INNOVATION MEETS DESIGN",
     projectNumber: "PROJECT 8",
@@ -73,7 +73,7 @@ const slidesData = [
     link: "project2.html"
   },
   {
-    img: "assets/slider2.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
     alt: "Slide 9",
     text: "INNOVATION MEETS DESIGN",
     projectNumber: "PROJECT 9",
@@ -81,7 +81,7 @@ const slidesData = [
     link: "project2.html"
   },
   {
-    img: "assets/slider2.jpg",
+    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
     alt: "Slide 10",
     text: "INNOVATION MEETS DESIGN",
     projectNumber: "PROJECT 10",
@@ -330,7 +330,59 @@ const Home = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+//highlight-col h3 elements
+  useEffect(() => {
+    // Select all counter elements. These elements should exist in the DOM,
+    // for example, inside a component that renders .highlight-col h3 elements.
+    const counters = document.querySelectorAll('.highlight-col h3');
 
+    // Function to animate a single counter element
+    const animateCounter = (element, endValue) => {
+      const duration = 2000; // Animation duration in milliseconds
+      const startTime = performance.now();
+
+      const updateCounter = (timestamp) => {
+        const elapsedTime = timestamp - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        const currentValue = Math.floor(progress * endValue);
+
+        element.textContent = currentValue;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCounter);
+        }
+      };
+
+      requestAnimationFrame(updateCounter);
+    };
+
+    // Intersection Observer options: trigger when 40% of the element is visible
+    const observerOptions = {
+      threshold: 0.4
+    };
+
+    // Create an observer to trigger the animation when the element is visible
+    const observer = new IntersectionObserver((entries, observerInstance) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Get the target value from a data attribute (data-target)
+          const targetValue = parseInt(entry.target.getAttribute('data-target'), 10);
+          animateCounter(entry.target, targetValue);
+          // Unobserve the element once the animation is triggered
+          observerInstance.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Observe each counter element
+    counters.forEach(counter => {
+      observer.observe(counter);
+    });
+
+    // Cleanup: disconnect the observer when the component unmounts
+    return () => observer.disconnect();
+
+  }, []);
   useEffect(() => {
     const projectsGrid = projectsGridRef.current;
     if (!projectsGrid) return;
@@ -346,7 +398,7 @@ const Home = () => {
         const projectElem = document.createElement('div');
         projectElem.classList.add('project-item');
         projectElem.innerHTML = `
-          <img src="/assets/${project.image}" alt="${project.name}">
+          <img src="https://iamsandip01.github.io/test-grid/assets/${project.image}" alt="${project.name}">
           <a href="${project.link}" class="project-hover" title="${project.name} Details">
             <h3>${project.name}</h3>
             <p>${project.category}</p>
@@ -537,7 +589,7 @@ const Home = () => {
                   <span className="team-title-icon">●</span> ARCHITECT STUDIO
                 </p>
                 <div className="team-image-wrapper">
-                  <img src="/assets/team.jpg" alt="9Grid Team" className="team-image" ref={teamImageRef} />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/team.jpg" alt="9Grid Team" className="team-image" ref={teamImageRef} />
                 </div>
                 <p className="team-description" ref={teamDescriptionRef}>
                   At 9Grid Design, we specialize in the design of institutional,
@@ -616,7 +668,7 @@ const Home = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <img
-                    src="/assets/instagram logo.png"
+                    src="https://iamsandip01.github.io/test-grid/assets/instagram logo.png"
                     style={{ marginTop: 5 }}
                     alt="Icon"
                   />
@@ -626,39 +678,39 @@ const Home = () => {
               {/* First Grid */}
               <div className="insta-grid">
                 <div className="large-image">
-                  <img src="/assets/img1.png" alt="Large Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img1.png" alt="Large Image" />
                 </div>
                 <div className="small-images">
-                  <img src="/assets/img2.png" alt="Small Image" />
-                  <img src="/assets/img3.png" alt="Small Image" />
-                  <img src="/assets/img4.png" alt="Small Image" />
-                  <img src="/assets/img5.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img2.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img3.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img4.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img5.png" alt="Small Image" />
                 </div>
               </div>
               {/* Second Grid */}
               <div className="insta-grid">
                 <div className="small-images">
-                  <img src="/assets/img6.png" alt="Small Image" />
-                  <img src="/assets/img7.png" alt="Small Image" />
-                  <img src="/assets/img8.png" alt="Small Image" />
-                  <img src="/assets/img9.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img6.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img7.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img8.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img9.png" alt="Small Image" />
                 </div>
                 <div className="large-image">
-                  <img src="/assets/img10.png" alt="Large Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img10.png" alt="Large Image" />
                 </div>
               </div>
               {/* Third Grid (Middle Large Image) */}
               <div className="insta-grid third-layout">
                 <div className="small-images vertical">
-                  <img src="/assets/img11.png" alt="Small Image" />
-                  <img src="/assets/img12.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img11.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img12.png" alt="Small Image" />
                 </div>
                 <div className="large-image">
-                  <img src="/assets/img1.png" alt="Large Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img1.png" alt="Large Image" />
                 </div>
                 <div className="small-images vertical">
-                  <img src="/assets/img2.png" alt="Small Image" />
-                  <img src="/assets/img3.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img2.png" alt="Small Image" />
+                  <img src="https://iamsandip01.github.io/test-grid/assets/img3.png" alt="Small Image" />
                 </div>
               </div>
               <button

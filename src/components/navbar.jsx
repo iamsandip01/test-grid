@@ -1,43 +1,92 @@
-import React from "react";
-import { Link } from "react-router-dom"; 
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FaBars } from 'react-icons/fa'; // import the hamburger icon from react-icons
 import './navbar.css';
 
 const Navbar = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Update on resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <nav className="navbar-container">
-      <div className="logo-container">
-        <img src="../../public/assets/logo_white.png" style={{ maxWidth: "160px" }} alt="" />
+    <header className="navbar">
+      <div className="navbar-bg" />
+      <div id="nav1" className="logo">
+        <Link to="/">
+          <img
+            src="https://iamsandip01.github.io/test-grid/assets/logo_white.png"
+            alt="Logo"
+            height="20px"
+          />
+        </Link>
       </div>
-      <ul className="link-container">
-        <li className="nav-link"><Link to="/">HOME</Link></li>
-        <li className="nav-link">
-        <Link to="/projects">PROJECTS</Link></li>
-        <li className="nav-link">GALLERY</li>
-        <li className="nav-link">ABOUT US</li>
-        <li className="nav-link">
-        {/* <Link to="/publications">PUBLICATIONS</Link> */}
-        </li>
-        <li className="nav-link">
-        <Link to="/contact">CONTACT US</Link></li>
-      </ul>
-      <div className="nav-item">
-        DESIGN YOUR DREAM
-        <svg
-          id="arrow-horizontal"
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="10"
-          viewBox="0 0 46 16"
-        >
-          <path
-            id="Path_10"
-            data-name="Path 10"
-            d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z"
-            transform="translate(30)"
-          ></path>
-        </svg>
-      </div>
-    </nav>
+
+      {/* Desktop Navigation */}
+      {!isMobile && (
+        <ul className="link-container">
+          <li className="nav-link">
+            <Link to="/">HOME</Link>
+          </li>
+          <li className="nav-link">
+            <Link to="/projects">PROJECTS</Link>
+          </li>
+          <li className="nav-link">
+            <Link to="/gallery">GALLERY</Link>
+          </li>
+          <li className="nav-link">
+            <Link to="/about-us">ABOUT US</Link>
+          </li>
+          <li className="nav-link">
+            <Link to="/contact">CONTACT US</Link>
+          </li>
+        </ul>
+      )}
+
+      {/* Mobile Navigation (Hamburger) */}
+      {isMobile && (
+        <>
+          <div
+            className="hamburger"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <FaBars />
+          </div>
+          {menuOpen && (
+            <ul className="nav-links mobile">
+              <li className="nav-link">
+                <Link to="/">HOME</Link>
+              </li>
+              <li className="nav-link">
+                <Link to="/projects" id="projects-link">PROJECTS</Link>
+              </li>
+              <li className="nav-link">
+                <Link to="/gallery">GALLERY</Link>
+              </li>
+              <li className="nav-link">
+                <Link to="/about-us">ABOUT US</Link>
+              </li>
+              <li className="nav-link">
+                <Link to="/contact">CONTACT US</Link>
+              </li>
+            </ul>
+          )}
+        </>
+      )}
+    </header>
   );
 };
 

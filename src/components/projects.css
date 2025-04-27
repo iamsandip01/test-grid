@@ -58,7 +58,8 @@
 .hero {
     font-family: 'Gilroy-Light', sans-serif;
     width: 100%;
-    padding: 10rem 4% 4rem 4%;
+    padding: 4rem 4% 4rem 4%;
+    padding-top: 2rem !important;
     background-color: #fff;
 }
 

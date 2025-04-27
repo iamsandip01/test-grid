@@ -3,8 +3,8 @@ import { useParams } from "react-router-dom";
 import "./projectDetails.css";
 
 const folderMap = {
-  hsb_mayapur: "1NiA9Tb6L7wPqT0Eq4F_203VsULuHeT1d", // Folder ID for projectOne
-  hsb_taki: "1fcxXS-l5FaTEuU-Ca8H7HNigknBCY_Ol",       // Replace with the actual folder ID for projectTwo
+  hsb_mayapur: "1NiA9Tb6L7wPqT0Eq4F_203VsULuHeT1d",
+  hsb_taki: "1fcxXS-l5FaTEuU-Ca8H7HNigknBCY_Ol",
   // Add more projects and their corresponding folder IDs as needed
 };
 
@@ -13,27 +13,60 @@ function ProjectDetail() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const imagesPerPage = 9; // Adjust this value as needed
+  // const imagesPerPage = 9; // Adjust this value as needed
 
   useEffect(() => {
     const loadGalleryImages = async () => {
       const folderId = folderMap[projectName.toLowerCase()];
+      if (!folderId) {
+        setError("Invalid project folder.");
+        return;
+      }
+      
       console.log("Folder ID:", folderId);
       const apiKey = "AIzaSyBpwub0vsI0dlqLf_Q0RHpuCfkvpe1Ta7s"; // Your Google API Key
-      const url = `https://www.googleapis.com/drive/v3/files?q='${folderId}'+in+parents&key=${apiKey}&pageSize=1000&orderBy=createdTime+desc&fields=files(createdTime,id,name),nextPageToken&supportsAllDrives=true`;
+      
+      let allFiles = [];
+      let nextPageToken = null;
+
+      // Build your query with proper URL encoding:
+      const query = encodeURIComponent(`'${folderId}' in parents`);
+      console.log("Encoded query:", query);
 
       try {
-        const response = await fetch(url);
-        console.log("API Response Status:", response.status);
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        console.log("Fetched Data:", data);
+        do {
+          const pageTokenParam = nextPageToken ? `&pageToken=${nextPageToken}` : "";
+          const url = `https://www.googleapis.com/drive/v3/files?q=${query}&key=${apiKey}&pageSize=1000${pageTokenParam}&fields=files(createdTime,id,name),nextPageToken&supportsAllDrives=true`;
+          console.log("Fetching URL:", url);
 
-        if (data.files && data.files.length > 0) {
-          // Map the data to images; if you prefer, you can switch endpoints here
-          const images = data.files.map((file) => ({
+          const response = await fetch(url);
+          console.log("API Response Status:", response.status);
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Fetched Data:", data);
+
+          if (data.files && data.files.length > 0) {
+            allFiles = allFiles.concat(data.files);
+            console.log(`Fetched ${data.files.length} files in this batch. Total so far: ${allFiles.length}`);
+          } else {
+            console.warn("No files found in this response.");
+            break;
+          }
+          
+          nextPageToken = data.nextPageToken;
+          if (nextPageToken) {
+            console.log("Next page token found:", nextPageToken);
+          } else {
+            console.log("No next page token. Finished fetching all pages.");
+          }
+        } while (nextPageToken);
+
+        // Process images if any were returned
+        if (allFiles.length > 0) {
+          const images = allFiles.map((file) => ({
             src: `https://drive.google.com/thumbnail?id=${file.id}&sz=s800`,
             alt: file.name,
           }));
@@ -52,23 +85,24 @@ function ProjectDetail() {
     loadGalleryImages();
   }, [projectName]);
 
-  // Pagination calculations
-  const indexOfLastImage = currentPage * imagesPerPage;
-  const indexOfFirstImage = indexOfLastImage - imagesPerPage;
-  const currentImages = galleryImages.slice(indexOfFirstImage, indexOfLastImage);
-  const totalPages = Math.ceil(galleryImages.length / imagesPerPage);
+  // Pagination calculations on the loaded images
+  // const indexOfLastImage = currentPage * imagesPerPage;
+  // const indexOfFirstImage = indexOfLastImage - imagesPerPage;
+  const currentImages = galleryImages;
+  // .slice(indexOfFirstImage, indexOfLastImage);
+  // const totalPages = Math.ceil(galleryImages.length / imagesPerPage);
 
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage((prevPage) => prevPage - 1);
-    }
-  };
+  // const handlePreviousPage = () => {
+  //   if (currentPage > 1) {
+  //     setCurrentPage((prevPage) => prevPage - 1);
+  //   }
+  // };
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  };
+  // const handleNextPage = () => {
+  //   if (currentPage < totalPages) {
+  //     setCurrentPage((prevPage) => prevPage + 1);
+  //   }
+  // };
 
   return (
     <div className="project-details">
@@ -110,8 +144,6 @@ function ProjectDetail() {
                 alt={image.alt}
                 className="gallery-img"
                 onError={(e) => {
-                  // console.log("Image failed to load:", e);
-                  // console.log("Native event:", e.nativeEvent);
                   e.target.src = "https://www.udacity.com/blog/wp-content/uploads/2021/02/img8.png";
                   e.target.style.objectFit = "contain";
                 }}
@@ -124,7 +156,7 @@ function ProjectDetail() {
       </div>
 
       {/* Pagination controls */}
-      {galleryImages.length > imagesPerPage && (
+      {/* {galleryImages.length > imagesPerPage && (
         <div className="pagination-controls">
           <button onClick={handlePreviousPage} disabled={currentPage === 1}>
             Previous
@@ -136,7 +168,7 @@ function ProjectDetail() {
             Next
           </button>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
