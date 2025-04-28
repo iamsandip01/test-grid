@@ -168,7 +168,7 @@ body {
 .about {
     position: relative;
     z-index: 998;
-    background-image: url(https://iamsandip01.github.io/test-grid/assets/about-bg.jpg);
+    background-image: url(https://drive.google.com/thumbnail?id=1ReG4gMLDkwW0WDJwR9Cjev3zmEtFvDEk&sz=s800);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -582,6 +582,7 @@ body {
     background-image: linear-gradient(rgba(33, 28, 40, 0.7),
             rgba(33, 28, 40, 0.7)),
         url(https://iamsandip01.github.io/test-grid/assets/high_bg4.jpg);
+        /* https://drive.google.com/thumbnail?id=1vjhY-XRtkfnyVv67q-dCsLoPPxJ1yFW9&sz=s800 */
     background-position: center;
     background-size: cover;
 }
@@ -961,9 +962,9 @@ body {
         font-size: 16px;
     }
 
-    .projects-grid {
+    /* .projects-grid {
         grid-template-columns: repeat(1, 1fr);
-    }
+    } */
 
     .highlight-col {
         flex-basis: 100%;

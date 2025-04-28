@@ -625,7 +625,7 @@ img {
 @media screen and (max-width: 768px) {
   .collapsible-gallery{
     margin: 3rem;
-    padding-right: 8rem;
+    padding-right: 7rem;
   }
   .gallery {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

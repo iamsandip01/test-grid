@@ -18,13 +18,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/project/:projectName" element={<ProjectDetail />} />
-
+        <Route path="/contact-us" element={<ContactUs />} /> 
         {/* <Route path="/project/hsb-mayapur" element={<HSB_Mayapur />} />
         <Route path="/project/hsb-taki" element={<HSB_Taki />} /> */}
         <Route path="/gallery" element={<Gallery />} />
         {/* <Route path="/about-us" element={<AboutUs />} /> */}
         {/* <Route path="/publications" element={<Publications />} /> */}
-        <Route path="/contact" element={<ContactUs />} /> 
+        
       </Routes>
       <Footer/>
     </Router>

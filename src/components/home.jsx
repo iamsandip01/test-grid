@@ -6,89 +6,51 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CustomEase } from 'gsap/CustomEase';
 
-
-const slidesData = [
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider1.jpg",
-    alt: "Slide 1",
-    text: "WE CREATE SPACE FOR MANUFACTURING",
-    projectNumber: "PROJECT 1",
-    projectType: "Industrial",
-    link: "project1.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
-    alt: "Slide 2",
-    text: "INNOVATION MEETS DESIGN",
-    projectNumber: "PROJECT 2",
-    projectType: "Creative",
-    link: "project2.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider3.jpg",
-    alt: "Slide 3",
-    text: "BUILDING THE FUTURE",
-    projectNumber: "PROJECT 3",
-    projectType: "Modern",
-    link: "project3.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider4.jpg",
-    alt: "Slide 4",
-    text: "ARCHITECTURE REDEFINED",
-    projectNumber: "PROJECT 4",
-    projectType: "Sustainable",
-    link: "project4.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider5.jpg",
-    alt: "Slide 5",
-    text: "EXPERIENCE EXCELLENCE",
-    projectNumber: "PROJECT 5",
-    projectType: "Luxury",
-    link: "project5.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
-    alt: "Slide 6",
-    text: "INNOVATION MEETS DESIGN",
-    projectNumber: "PROJECT 6",
-    projectType: "Creative",
-    link: "project2.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
-    alt: "Slide 7",
-    text: "INNOVATION MEETS DESIGN",
-    projectNumber: "PROJECT 7",
-    projectType: "Creative",
-    link: "project2.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
-    alt: "Slide 8",
-    text: "INNOVATION MEETS DESIGN",
-    projectNumber: "PROJECT 8",
-    projectType: "Creative",
-    link: "project2.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
-    alt: "Slide 9",
-    text: "INNOVATION MEETS DESIGN",
-    projectNumber: "PROJECT 9",
-    projectType: "Creative",
-    link: "project2.html"
-  },
-  {
-    img: "https://iamsandip01.github.io/test-grid/assets/slider2.jpg",
-    alt: "Slide 10",
-    text: "INNOVATION MEETS DESIGN",
-    projectNumber: "PROJECT 10",
-    projectType: "Creative",
-    link: "project2.html"
-  }
+const slides = [
+  "1m7EyBxWciGBNy9kM9Zc56BrJegJx-LL7",
+  "1IZNYNExULaLTTlpLLxjv1M2CCLemSbOi",
+  "14hnAtplwME5eGSjQgC-nTwrhTn32_j0_",
+  "1Da8W_gvXSrxzLwuW2V9zTcQFZSXuJkY4",
+  "1m7EyBxWciGBNy9kM9Zc56BrJegJx-LL7",
+  "1IZNYNExULaLTTlpLLxjv1M2CCLemSbOi",
+  "14hnAtplwME5eGSjQgC-nTwrhTn32_j0_",
+  "1Da8W_gvXSrxzLwuW2V9zTcQFZSXuJkY4",
+  "1m7EyBxWciGBNy9kM9Zc56BrJegJx-LL7",
+  "1IZNYNExULaLTTlpLLxjv1M2CCLemSbOi",
 ];
+
+const slidesData = slides.map((id, index) => ({
+  img: `https://drive.google.com/thumbnail?id=${id}&sz=s800`, // Thumbnail URL
+  alt: `Slide ${index + 1}`, // Alt text for the image
+  text: [
+    "WE CREATE SPACE FOR MANUFACTURING",
+    "INNOVATION MEETS DESIGN",
+    "BUILDING THE FUTURE",
+    "ARCHITECTURE REDEFINED",
+    "EXPERIENCE EXCELLENCE",
+    "WE CREATE SPACE FOR MANUFACTURING",
+    "INNOVATION MEETS DESIGN",
+    "BUILDING THE FUTURE",
+    "ARCHITECTURE REDEFINED",
+    "EXPERIENCE EXCELLENCE",
+  ][index], // Dynamic text for each slide
+  projectNumber: `PROJECT ${index + 1}`, // Dynamic project number
+  projectType: [
+    "Industrial",
+    "Creative",
+    "Modern",
+    "Sustainable",
+    "Luxury",
+    "Industrial",
+    "Creative",
+    "Modern",
+    "Sustainable",
+    "Luxury",
+  ][index], // Dynamic project type
+  link: `project${index + 1}.html`, // Dynamic project link
+}));
+
+console.log(slidesData);
 
 const Home = () => {
   // Refs for key DOM elements
@@ -331,58 +293,58 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 //highlight-col h3 elements
-  useEffect(() => {
-    // Select all counter elements. These elements should exist in the DOM,
-    // for example, inside a component that renders .highlight-col h3 elements.
-    const counters = document.querySelectorAll('.highlight-col h3');
+useEffect(() => {
+  // Select all counter elements
+  const counters = document.querySelectorAll('.highlight-col h3');
 
-    // Function to animate a single counter element
-    const animateCounter = (element, endValue) => {
-      const duration = 2000; // Animation duration in milliseconds
-      const startTime = performance.now();
+  // Function to animate a single counter
+  const animateCounter = (element, endValue) => {
+    const duration = 1000; // Reduce duration for smoother animations
+    const startTime = performance.now();
 
-      const updateCounter = (timestamp) => {
-        const elapsedTime = timestamp - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        const currentValue = Math.floor(progress * endValue);
+    const updateCounter = (timestamp) => {
+      const elapsedTime = timestamp - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      const currentValue = Math.floor(progress * endValue);
 
-        element.textContent = currentValue;
+      element.textContent = currentValue;
 
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        }
-      };
-
-      requestAnimationFrame(updateCounter);
+      // Only request animation frame if progress is less than 1
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      }
     };
 
-    // Intersection Observer options: trigger when 40% of the element is visible
-    const observerOptions = {
-      threshold: 0.4
-    };
+    requestAnimationFrame(updateCounter);
+  };
 
-    // Create an observer to trigger the animation when the element is visible
-    const observer = new IntersectionObserver((entries, observerInstance) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Get the target value from a data attribute (data-target)
-          const targetValue = parseInt(entry.target.getAttribute('data-target'), 10);
-          animateCounter(entry.target, targetValue);
-          // Unobserve the element once the animation is triggered
-          observerInstance.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
+  // Use IntersectionObserver for lazy animation when elements are visible
+  const observerOptions = {
+    root: null, // Default viewport
+    rootMargin: "0px",
+    threshold: 0.4, // Trigger when 40% of element is visible
+  };
 
-    // Observe each counter element
-    counters.forEach(counter => {
-      observer.observe(counter);
+  const observer = new IntersectionObserver((entries, observerInstance) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const targetValue = parseInt(entry.target.getAttribute('data-target'), 10);
+        animateCounter(entry.target, targetValue);
+
+        // Unobserve the element after animation triggers
+        observerInstance.unobserve(entry.target);
+      }
     });
+  }, observerOptions);
 
-    // Cleanup: disconnect the observer when the component unmounts
-    return () => observer.disconnect();
+  // Attach observer to each counter element
+  counters.forEach((counter) => {
+    observer.observe(counter);
+  });
 
-  }, []);
+  // Cleanup observer on component unmount
+  return () => observer.disconnect();
+}, []);
   useEffect(() => {
     const projectsGrid = projectsGridRef.current;
     if (!projectsGrid) return;
@@ -589,7 +551,7 @@ const Home = () => {
                   <span className="team-title-icon">●</span> ARCHITECT STUDIO
                 </p>
                 <div className="team-image-wrapper">
-                  <img src="https://iamsandip01.github.io/test-grid/assets/team.jpg" alt="9Grid Team" className="team-image" ref={teamImageRef} />
+                  <img src="https://drive.google.com/thumbnail?id=1i0eA8ZQtzB7-rRGlubMWWQJSgwCgnDrA&sz=s800" alt="9Grid Team" className="team-image" ref={teamImageRef} />
                 </div>
                 <p className="team-description" ref={teamDescriptionRef}>
                   At 9Grid Design, we specialize in the design of institutional,
@@ -640,7 +602,7 @@ const Home = () => {
             {/* HIGHLIGHTS SECTION */}
             <section className="highlights">
               <h1>Our Key Highlights</h1>
-              <p>Discover the achievements that set Design India apart.</p>
+              <p>Discover the achievements</p>
               <div className="row">
                 <div className="highlight-col">
                   <h3 data-target={350}>0</h3>
